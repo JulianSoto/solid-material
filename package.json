@@ -1,0 +1,27 @@
+{
+  "name": "solid-material",
+  "version": "0.1.0",
+  "description": "Material Design Component wrappers for the SolidJS framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulianSoto/solid-material.git"
+  },
+  "keywords": [
+    "solid",
+    "solidjs",
+    "material",
+    "design",
+    "ui",
+    "component"
+  ],
+  "author": "Julian Soto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JulianSoto/solid-material/issues"
+  },
+  "homepage": "https://github.com/JulianSoto/solid-material#readme"
+}
