@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/JulianSoto/solid-material/issues"
   },
-  "homepage": "https://github.com/JulianSoto/solid-material#readme"
+  "homepage": "https://github.com/JulianSoto/solid-material#readme",
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  }
 }
