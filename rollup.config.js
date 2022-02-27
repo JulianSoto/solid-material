@@ -8,12 +8,14 @@ export default {
   input: "src/index.tsx",
   output: [
     {
-      file: packageJson.main,
+      dir: packageJson.main,
       format: "cjs",
+      preserveModules: true,
     },
     {
-      file: packageJson.module,
+      dir: packageJson.module,
       format: "es",
+      preserveModules: true,
     },
   ],
   plugins: [
