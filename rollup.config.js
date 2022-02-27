@@ -1,5 +1,7 @@
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import { babel } from "@rollup/plugin-babel";
+import nodeResolve from "@rollup/plugin-node-resolve";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import packageJson from "./package.json";
 
 export default {
@@ -15,6 +17,8 @@ export default {
     },
   ],
   plugins: [
+    peerDepsExternal(),
+    nodeResolve({ extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"] }),
     babel({
       extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"],
       babelHelpers: "runtime",
