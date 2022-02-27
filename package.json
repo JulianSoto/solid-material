@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/JulianSoto/solid-material#readme",
   "devDependencies": {
+    "@babel/core": "^7.17.5",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-typescript": "^7.16.7",
     "@rollup/plugin-babel": "^5.3.1",
