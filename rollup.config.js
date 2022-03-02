@@ -2,6 +2,7 @@ import { DEFAULT_EXTENSIONS } from "@babel/core";
 import { babel } from "@rollup/plugin-babel";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
+import postcss from "rollup-plugin-postcss";
 
 export default {
   input: "src/index.tsx",
@@ -20,6 +21,11 @@ export default {
   plugins: [
     peerDepsExternal(),
     nodeResolve({ extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"] }),
+    postcss({
+      extract: false,
+      modules: true,
+      use: ["sass"],
+    }),
     babel({
       extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"],
       babelHelpers: "runtime",
