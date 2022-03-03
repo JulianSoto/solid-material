@@ -3,6 +3,8 @@ import { babel } from "@rollup/plugin-babel";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
+import sass from "sass";
+import path from "path";
 
 export default {
   input: "src/index.tsx",
@@ -25,6 +27,19 @@ export default {
       extract: false,
       modules: true,
       use: ["sass"],
+      loaders: [
+        {
+          name: "sass",
+          test: /\.(sass|scss)$/,
+          process: (ctx) => {
+            const result = sass.renderSync({
+              data: ctx.code,
+              includePaths: [path.join(__dirname, "node_modules")],
+            });
+            return { code: result.css.toString() };
+          },
+        },
+      ],
     }),
     babel({
       extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"],
