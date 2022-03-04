@@ -1,5 +1,6 @@
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import { babel } from "@rollup/plugin-babel";
+import commonjs from "@rollup/plugin-commonjs";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
@@ -23,6 +24,7 @@ export default {
   plugins: [
     peerDepsExternal(),
     nodeResolve({ extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"] }),
+    commonjs({ include: /node_modules/ }),
     postcss({
       extract: false,
       modules: true,
