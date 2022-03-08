@@ -5,7 +5,7 @@ import {
   PropsWithChildren,
 } from "solid-js";
 import classNames from "classnames";
-import styles from "./TopAppBar.scss";
+import "./TopAppBar.scss";
 import { MDCTopAppBar } from "@material/top-app-bar";
 import { MDCRipple } from "@material/ripple";
 
@@ -42,20 +42,18 @@ const TopAppBar = (_props: PropsWithChildren<TopAppBarProps>) => {
   return (
     <header
       class={classNames({
-        [styles["mdc-top-app-bar"]]: true,
-        [styles["mdc-top-app-bar--dense"]]:
-          props.variant === "regular" && props.dense,
-        [styles["mdc-top-app-bar--fixed"]]:
-          props.variant === "regular" && props.fixed,
-        [styles["mdc-top-app-bar--prominent"]]:
+        "mdc-top-app-bar": true,
+        "mdc-top-app-bar--dense": props.variant === "regular" && props.dense,
+        "mdc-top-app-bar--fixed": props.variant === "regular" && props.fixed,
+        "mdc-top-app-bar--prominent":
           props.variant === "regular" && props.prominent,
-        [styles["mdc-top-app-bar--short"]]: props.variant === "short",
-        [styles["mdc-top-app-bar--short-collapsed"]]:
+        "mdc-top-app-bar--short": props.variant === "short",
+        "mdc-top-app-bar--short-collapsed":
           props.variant === "short" && props.collapsed,
       })}
       ref={(el) => (topAppBarElement = el)}
     >
-      <div class={styles["mdc-top-app-bar__row"]}>{props.children}</div>
+      <div class={"mdc-top-app-bar__row"}>{props.children}</div>
     </header>
   );
 };
@@ -77,10 +75,7 @@ TopAppBar.ActionItem = (props: PropsWithChildren<{}>) => {
   return (
     <span
       ref={(el) => (actionItemElement = el)}
-      class={classNames(
-        styles["mdc-top-app-bar__action-item"],
-        styles["mdc-icon-button"]
-      )}
+      class={classNames("mdc-top-app-bar__action-item", "mdc-icon-button")}
     >
       {props.children}
     </span>
@@ -104,10 +99,7 @@ TopAppBar.NavigationIcon = (props: PropsWithChildren<{}>) => {
   return (
     <span
       ref={(el) => (navigationIconElement = el)}
-      class={classNames(
-        styles["mdc-top-app-bar__navigation-icon"],
-        styles["mdc-icon-button"]
-      )}
+      class={classNames("mdc-top-app-bar__navigation-icon", "mdc-icon-button")}
     >
       {props.children}
     </span>
@@ -122,10 +114,9 @@ TopAppBar.Section = (props: PropsWithChildren<TopAppBarSectionProps>) => {
   return (
     <section
       class={classNames({
-        [styles["mdc-top-app-bar__section"]]: true,
-        [styles["mdc-top-app-bar__section--align-start"]]:
-          props.align === "start",
-        [styles["mdc-top-app-bar__section--align-end"]]: props.align === "end",
+        "mdc-top-app-bar__section": true,
+        "mdc-top-app-bar__section--align-start": props.align === "start",
+        "mdc-top-app-bar__section--align-end": props.align === "end",
       })}
     >
       {props.children}
@@ -134,7 +125,7 @@ TopAppBar.Section = (props: PropsWithChildren<TopAppBarSectionProps>) => {
 };
 
 TopAppBar.Title = (props: PropsWithChildren<{}>) => {
-  return <span class={styles["mdc-top-app-bar__title"]}>{props.children}</span>;
+  return <span class={"mdc-top-app-bar__title"}>{props.children}</span>;
 };
 
 export { TopAppBar };

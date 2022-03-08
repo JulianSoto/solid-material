@@ -6,7 +6,7 @@ import {
 } from "solid-js";
 import classNames from "classnames";
 import { MDCRipple } from "@material/ripple";
-import styles from "./Button.scss";
+import "./Button.scss";
 
 export interface CommonButtonProps {
   disabled?: boolean;
@@ -39,21 +39,20 @@ const Button = (_props: PropsWithChildren<ButtonProps>) => {
   onCleanup(() => buttonRipple?.destroy());
 
   return (
-    <div class={styles["mdc-touch-target-wrapper"]}>
+    <div class={"mdc-touch-target-wrapper"}>
       <button
         disabled={props.disabled}
         ref={(el) => (buttonElement = el)}
-        class={classNames(styles["mdc-button"], styles["mdc-button--touch"], {
-          [styles["mdc-button--outlined"]]: props.variant === "outlined",
-          [styles["mdc-button--unelevated"]]:
+        class={classNames("mdc-button", "mdc-button--touch", {
+          "mdc-button--outlined": props.variant === "outlined",
+          "mdc-button--unelevated":
             props.variant === "contained" && !props.elevated,
-          [styles["mdc-button--raised"]]:
-            props.variant === "contained" && props.elevated,
+          "mdc-button--raised": props.variant === "contained" && props.elevated,
         })}
       >
-        <span class={styles["mdc-button__ripple"]}></span>
-        <span class={styles["mdc-button__touch"]}></span>
-        <span class={styles["mdc-button__label"]}>{props.children}</span>
+        <span class={"mdc-button__ripple"}></span>
+        <span class={"mdc-button__touch"}></span>
+        <span class={"mdc-button__label"}>{props.children}</span>
       </button>
     </div>
   );

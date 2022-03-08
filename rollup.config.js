@@ -27,7 +27,7 @@ export default {
     commonjs({ include: /node_modules/ }),
     postcss({
       extract: false,
-      modules: true,
+      modules: false,
       use: ["sass"],
       loaders: [
         {
