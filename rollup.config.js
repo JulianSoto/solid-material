@@ -23,7 +23,10 @@ export default {
   ],
   plugins: [
     peerDepsExternal(),
-    nodeResolve({ extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"] }),
+    nodeResolve({
+      extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"],
+      browser: true,
+    }),
     commonjs({ include: /node_modules/ }),
     postcss({
       extract: false,
