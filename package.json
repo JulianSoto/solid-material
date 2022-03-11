@@ -31,6 +31,7 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-typescript": "^7.16.7",
     "@material/button": "^13.0.0",
+    "@material/card": "^13.0.0",
     "@material/checkbox": "^13.0.0",
     "@material/icon-button": "^13.0.0",
     "@material/textfield": "^13.0.0",
