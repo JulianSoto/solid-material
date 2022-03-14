@@ -3,4 +3,5 @@ export { Button } from "./Button";
 export { Checkbox } from "./Checkbox";
 export { TextField } from "./TextField";
 export { Card } from "./Card";
-export { CTA } from "./Typography";
+export { Typography } from "./Typography";
+export { List } from "./List";
