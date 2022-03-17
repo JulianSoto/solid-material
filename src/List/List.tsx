@@ -3,7 +3,7 @@ import { MDCList } from "@material/list";
 import { MDCRipple } from "@material/ripple";
 import "./List.scss";
 
-interface ListItem {
+export interface ListItem {
   text: string;
   onClick?: JSX.EventHandlerUnion<HTMLLIElement, MouseEvent>;
   itemProps?: JSX.HTMLAttributes<HTMLLIElement>;
