@@ -1,5 +1,6 @@
 import {
   createEffect,
+  JSX,
   mergeProps,
   onCleanup,
   PropsWithChildren,
@@ -9,7 +10,9 @@ import { MDCRipple } from "@material/ripple";
 import "./Button.scss";
 
 export interface CommonButtonProps {
+  onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
   disabled?: boolean;
+  buttonProps?: JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 export interface TextOutlinedButtonProps {
@@ -41,6 +44,11 @@ const Button = (_props: PropsWithChildren<ButtonProps>) => {
   return (
     <div class={"mdc-touch-target-wrapper"}>
       <button
+        {...{
+          ...props.buttonProps,
+          onclick: props.onClick || props.buttonProps?.onclick,
+          onClick: props.onClick || props.buttonProps?.onClick,
+        }}
         disabled={props.disabled}
         ref={(el) => (buttonElement = el)}
         class={classNames("mdc-button", "mdc-button--touch", {
