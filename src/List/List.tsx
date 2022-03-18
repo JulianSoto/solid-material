@@ -61,7 +61,19 @@ const List = (props: ListProps) => {
       class="mdc-deprecated-list"
       ref={(el) => (listElement = el)}
     >
-      <For each={props.items}>{(item) => <Item {...item} />}</For>
+      <For each={props.items}>
+        {(item, index) => (
+          <Item
+            {...{
+              ...item,
+              itemProps: {
+                ...(item.itemProps || {}),
+                tabindex: index() === 0 ? "0" : undefined,
+              },
+            }}
+          />
+        )}
+      </For>
     </ul>
   );
 };
