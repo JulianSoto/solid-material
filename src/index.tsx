@@ -6,3 +6,4 @@ export { Card } from "./Card";
 export { Typography } from "./Typography";
 export { List } from "./List";
 export { Menu } from "./Menu";
+export { Tabs } from "./Tabs";
