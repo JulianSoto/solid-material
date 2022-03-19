@@ -1,0 +1,5 @@
+@use "@material/drawer";
+
+@include drawer.core-styles;
+@include drawer.dismissible-core-styles;
+@include drawer.modal-core-styles;

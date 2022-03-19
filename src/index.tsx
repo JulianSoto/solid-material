@@ -7,3 +7,4 @@ export { Typography } from "./Typography";
 export { List } from "./List";
 export { Menu } from "./Menu";
 export { Tabs } from "./Tabs";
+export { Drawer } from "./Drawer";
