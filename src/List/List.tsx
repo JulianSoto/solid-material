@@ -51,7 +51,12 @@ const List = (props: ListProps) => {
 
   createEffect(() => {
     if (listElement) {
-      list = new MDCList(listElement);
+      const closestDrawer = listElement.closest(
+        ".mdc-drawer.mdc-drawer--modal"
+      );
+      if (!closestDrawer) {
+        list = new MDCList(listElement);
+      }
     }
   });
 
@@ -68,7 +73,7 @@ const List = (props: ListProps) => {
               ...item,
               itemProps: {
                 ...(item.itemProps || {}),
-                tabindex: index() === 0 ? "0" : undefined,
+                tabindex: index() === 0 ? "0" : "-1",
               },
             }}
           />
