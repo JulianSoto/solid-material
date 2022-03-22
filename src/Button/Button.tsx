@@ -13,6 +13,8 @@ export interface CommonButtonProps {
   onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
   disabled?: boolean;
   buttonProps?: JSX.ButtonHTMLAttributes<HTMLButtonElement>;
+  leadingIcon?: JSX.Element;
+  trailingIcon?: JSX.Element;
 }
 
 export interface TextOutlinedButtonProps {
@@ -60,7 +62,13 @@ const Button = (_props: PropsWithChildren<ButtonProps>) => {
       >
         <span class={"mdc-button__ripple"}></span>
         <span class={"mdc-button__touch"}></span>
+        {props.leadingIcon && (
+          <span class="mdc-button__icon">{props.leadingIcon}</span>
+        )}
         <span class={"mdc-button__label"}>{props.children}</span>
+        {props.trailingIcon && (
+          <span class="mdc-button__icon">{props.trailingIcon}</span>
+        )}
       </button>
     </div>
   );
