@@ -63,11 +63,15 @@ const Button = (_props: PropsWithChildren<ButtonProps>) => {
         <span class={"mdc-button__ripple"}></span>
         <span class={"mdc-button__touch"}></span>
         {props.leadingIcon && (
-          <span class="mdc-button__icon">{props.leadingIcon}</span>
+          <span class="mdc-button__icon" aria-hidden="true">
+            {props.leadingIcon}
+          </span>
         )}
         <span class={"mdc-button__label"}>{props.children}</span>
         {props.trailingIcon && (
-          <span class="mdc-button__icon">{props.trailingIcon}</span>
+          <span class="mdc-button__icon" aria-hidden="true">
+            {props.trailingIcon}
+          </span>
         )}
       </button>
     </div>
