@@ -2,11 +2,10 @@
   "name": "solid-material",
   "version": "0.3.0",
   "description": "Material Design Component wrappers for the SolidJS framework",
-  "main": "dist/cjs/src/index.js",
-  "module": "dist/es/src/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c && tsc --outdir ./dist/es/src && tsc --outdir ./dist/cjs/src"
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
