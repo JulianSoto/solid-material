@@ -8,15 +8,11 @@ import sass from "sass";
 import path from "path";
 
 export default {
+  external: [/@babel\/runtime/],
   input: "src/index.tsx",
   output: [
     {
-      dir: "dist/cjs",
-      format: "cjs",
-      preserveModules: true,
-    },
-    {
-      dir: "dist/es",
+      dir: "./dist",
       format: "es",
       preserveModules: true,
     },
