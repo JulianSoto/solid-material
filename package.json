@@ -1,6 +1,6 @@
 {
   "name": "solid-material",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Material Design Component wrappers for the SolidJS framework",
   "main": "dist/src/index.js",
   "files": [
