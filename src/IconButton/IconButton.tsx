@@ -1,19 +1,19 @@
 import {
   createEffect,
+  createSignal,
   onCleanup,
   PropsWithChildren,
-  JSX,
-  splitProps,
 } from "solid-js";
 import { MDCRipple } from "@material/ripple";
+import classNames from "classnames";
 import "./IconButton.scss";
 
 interface IconButtonProps {
   aria?: {
     labelOn: string;
     labelOff: string;
+    label?: string;
   };
-  buttonProps?: JSX.ButtonHTMLAttributes<HTMLButtonElement>;
   onClick?: (
     e: MouseEvent & {
       currentTarget: HTMLButtonElement;
@@ -23,35 +23,33 @@ interface IconButtonProps {
 }
 
 const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
-  const [local] = splitProps(props as PropsWithChildren<IconButtonProps>, [
-    "buttonProps",
-  ]);
-  let buttonElement: HTMLButtonElement | undefined;
-  let buttonRipple: MDCRipple | undefined;
+  let buttonElement: HTMLButtonElement;
+  const [buttonRipple, setButtonRipple] = createSignal<MDCRipple>();
+  const [isNavIcon, setIsNavIcon] = createSignal(false);
 
   createEffect(() => {
-    if (buttonElement) {
-      buttonRipple = new MDCRipple(buttonElement);
-      buttonRipple.initialize();
-      buttonRipple.unbounded = true;
-    }
+    const ripple = new MDCRipple(buttonElement);
+    ripple.initialize();
+    ripple.unbounded = true;
+    setButtonRipple(ripple);
+    setIsNavIcon(Boolean(buttonElement.closest(".mdc-top-app-bar")));
   });
 
-  onCleanup(() => buttonRipple?.destroy());
+  onCleanup(() => buttonRipple()?.destroy());
 
   return (
     <div class="mdc-touch-target-wrapper">
       <button
-        {...{
-          ...local.buttonProps,
-          onclick: props.onClick || local.buttonProps?.onclick,
-          onClick: props.onClick || local.buttonProps?.onClick,
-        }}
         onClick={(e) => {
           props.onClick?.(e);
         }}
-        class="mdc-icon-button mdc-icon-button--touch"
+        class={classNames({
+          "mdc-icon-button": true,
+          "mdc-icon-button--touch": true,
+          "mdc-top-app-bar__navigation-icon": isNavIcon(),
+        })}
         ref={(el) => (buttonElement = el)}
+        aria-label={props.aria?.label}
         data-aria-label-on={props.aria?.labelOn}
         data-aria-label-off={props.aria?.labelOff}
       >
