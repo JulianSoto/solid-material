@@ -1,5 +1,6 @@
 import {
   createEffect,
+  JSX,
   mergeProps,
   onCleanup,
   PropsWithChildren,
@@ -9,14 +10,18 @@ import "./TopAppBar.scss";
 import { MDCTopAppBar } from "@material/top-app-bar";
 import { MDCRipple } from "@material/ripple";
 
-export interface RegularTopAppBarProps {
+export interface CommonTopAppBarProps {
+  children: [JSX.Element, JSX.Element];
+}
+
+export interface RegularTopAppBarProps extends CommonTopAppBarProps {
   variant?: "regular";
   dense?: boolean;
   prominent?: boolean;
   fixed?: boolean;
 }
 
-export interface ShortTopAppBarProps {
+export interface ShortTopAppBarProps extends CommonTopAppBarProps {
   variant: "short";
   collapsed?: boolean;
 }
@@ -24,7 +29,7 @@ export interface ShortTopAppBarProps {
 // discriminating union
 export type TopAppBarProps = ShortTopAppBarProps | RegularTopAppBarProps;
 
-const TopAppBar = (_props: PropsWithChildren<TopAppBarProps>) => {
+const TopAppBar = (_props: TopAppBarProps) => {
   const props = mergeProps({ variant: "regular" }, _props);
   let topAppBarElement: HTMLElement | undefined;
   let topAppBar: MDCTopAppBar | undefined;
@@ -53,7 +58,14 @@ const TopAppBar = (_props: PropsWithChildren<TopAppBarProps>) => {
       })}
       ref={(el) => (topAppBarElement = el)}
     >
-      <div class={"mdc-top-app-bar__row"}>{props.children}</div>
+      <div class={"mdc-top-app-bar__row"}>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          {props.children[0]}
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+          {props.children[1]}
+        </section>
+      </div>
     </header>
   );
 };
@@ -103,24 +115,6 @@ TopAppBar.NavigationIcon = (props: PropsWithChildren<{}>) => {
     >
       {props.children}
     </span>
-  );
-};
-
-export interface TopAppBarSectionProps {
-  align: "start" | "end";
-}
-
-TopAppBar.Section = (props: PropsWithChildren<TopAppBarSectionProps>) => {
-  return (
-    <section
-      class={classNames({
-        "mdc-top-app-bar__section": true,
-        "mdc-top-app-bar__section--align-start": props.align === "start",
-        "mdc-top-app-bar__section--align-end": props.align === "end",
-      })}
-    >
-      {props.children}
-    </section>
   );
 };
 
