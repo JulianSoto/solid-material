@@ -10,7 +10,6 @@ import {
 import classNames from "classnames";
 import "./TopAppBar.scss";
 import { MDCTopAppBar } from "@material/top-app-bar";
-import { MDCRipple } from "@material/ripple";
 
 export interface CommonTopAppBarProps {
   children: [JSX.Element, JSX.Element];
@@ -75,54 +74,6 @@ const TopAppBar = (_props: TopAppBarProps) => {
         </For>
       </div>
     </header>
-  );
-};
-
-TopAppBar.ActionItem = (props: PropsWithChildren<{}>) => {
-  let actionItemElement: HTMLSpanElement | undefined;
-  let iconButtonRipple: MDCRipple | undefined;
-
-  createEffect(() => {
-    if (actionItemElement) {
-      iconButtonRipple = new MDCRipple(actionItemElement);
-      iconButtonRipple.unbounded = true;
-      iconButtonRipple.initialize();
-    }
-  });
-
-  onCleanup(() => iconButtonRipple?.destroy());
-
-  return (
-    <span
-      ref={(el) => (actionItemElement = el)}
-      class={classNames("mdc-top-app-bar__action-item", "mdc-icon-button")}
-    >
-      {props.children}
-    </span>
-  );
-};
-
-TopAppBar.NavigationIcon = (props: PropsWithChildren<{}>) => {
-  let navigationIconElement: HTMLSpanElement | undefined;
-  let iconButtonRipple: MDCRipple | undefined;
-
-  createEffect(() => {
-    if (navigationIconElement) {
-      iconButtonRipple = new MDCRipple(navigationIconElement);
-      iconButtonRipple.unbounded = true;
-      iconButtonRipple.initialize();
-    }
-  });
-
-  onCleanup(() => iconButtonRipple?.destroy());
-
-  return (
-    <span
-      ref={(el) => (navigationIconElement = el)}
-      class={classNames("mdc-top-app-bar__navigation-icon", "mdc-icon-button")}
-    >
-      {props.children}
-    </span>
   );
 };
 
