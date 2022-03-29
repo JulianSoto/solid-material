@@ -10,25 +10,27 @@ import {
 import classNames from "classnames";
 import "./TopAppBar.scss";
 import { MDCTopAppBar } from "@material/top-app-bar";
+import { Dynamic } from "solid-js/web";
 
 export interface CommonTopAppBarProps {
   children: [JSX.Element, JSX.Element];
 }
 
-export interface RegularTopAppBarProps extends CommonTopAppBarProps {
+export interface RegularTopAppBarProps {
   variant?: "regular";
   dense?: boolean;
   prominent?: boolean;
   fixed?: boolean;
 }
 
-export interface ShortTopAppBarProps extends CommonTopAppBarProps {
+export interface ShortTopAppBarProps {
   variant: "short";
   collapsed?: boolean;
 }
 
 // discriminating union
-export type TopAppBarProps = ShortTopAppBarProps | RegularTopAppBarProps;
+export type TopAppBarProps = (ShortTopAppBarProps | RegularTopAppBarProps) &
+  CommonTopAppBarProps;
 
 const TopAppBar = (_props: TopAppBarProps) => {
   const props = mergeProps({ variant: "regular" }, _props);
@@ -81,4 +83,36 @@ TopAppBar.Title = (props: PropsWithChildren<{}>) => {
   return <span class={"mdc-top-app-bar__title"}>{props.children}</span>;
 };
 
-export { TopAppBar };
+type TopAppBarAdjustProps = (
+  | {
+      variant?: "regular";
+      dense?: boolean;
+      prominent?: boolean;
+    }
+  | { variant: "short" }
+) & { element?: keyof HTMLElementTagNameMap };
+
+const TopAppBarAdjust = (props: PropsWithChildren<TopAppBarAdjustProps>) => {
+  const local = mergeProps({ variant: "regular" }, props);
+
+  return (
+    <Dynamic
+      component={local.element || "div"}
+      class={classNames({
+        "mdc-top-app-bar--fixed-adjust":
+          local.variant === "regular" && !local.prominent && !local.dense,
+        "mdc-top-app-bar--short-fixed-adjust": local.variant === "short",
+        "mdc-top-app-bar--prominent-fixed-adjust":
+          local.variant === "regular" && local.prominent && !local.dense,
+        "mdc-top-app-bar--dense-fixed-adjust":
+          local.variant === "regular" && local.dense && !local.prominent,
+        "mdc-top-app-bar--dense-prominent-fixed-adjust":
+          local.variant === "regular" && local.prominent && local.dense,
+      })}
+    >
+      {local.children}
+    </Dynamic>
+  );
+};
+
+export { TopAppBar, TopAppBarAdjust };
