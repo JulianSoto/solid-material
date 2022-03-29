@@ -1,5 +1,7 @@
 import {
   createEffect,
+  createSignal,
+  For,
   JSX,
   mergeProps,
   onCleanup,
@@ -31,18 +33,17 @@ export type TopAppBarProps = ShortTopAppBarProps | RegularTopAppBarProps;
 
 const TopAppBar = (_props: TopAppBarProps) => {
   const props = mergeProps({ variant: "regular" }, _props);
-  let topAppBarElement: HTMLElement | undefined;
-  let topAppBar: MDCTopAppBar | undefined;
+  let topAppBarElement: HTMLElement;
+  const [topAppBar, setTopAppBar] = createSignal<MDCTopAppBar>();
 
   createEffect(() => {
-    if (topAppBarElement) {
-      // Instantiation
-      topAppBar = new MDCTopAppBar(topAppBarElement);
-      topAppBar.initialize();
-    }
+    // Instantiation
+    const _topAppBar = new MDCTopAppBar(topAppBarElement);
+    _topAppBar.initialize();
+    setTopAppBar(_topAppBar);
   });
 
-  onCleanup(() => topAppBar?.destroy());
+  onCleanup(() => topAppBar()?.destroy());
 
   return (
     <header
@@ -59,12 +60,19 @@ const TopAppBar = (_props: TopAppBarProps) => {
       ref={(el) => (topAppBarElement = el)}
     >
       <div class={"mdc-top-app-bar__row"}>
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-          {props.children[0]}
-        </section>
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-          {props.children[1]}
-        </section>
+        <For each={props.children}>
+          {(section, index) => (
+            <section
+              class={classNames({
+                "mdc-top-app-bar__section": true,
+                "mdc-top-app-bar__section--align-start": index() === 0,
+                "mdc-top-app-bar__section--align-end": index() === 1,
+              })}
+            >
+              {section}
+            </section>
+          )}
+        </For>
       </div>
     </header>
   );
