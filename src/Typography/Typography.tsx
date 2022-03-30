@@ -1,3 +1,5 @@
+import { createMemo } from "solid-js";
+import { JSX } from "solid-js/jsx-runtime";
 import { Dynamic } from "solid-js/web";
 import "./Typography.scss";
 
@@ -17,15 +19,25 @@ export const variantMapping = {
   overline: "span",
 } as const;
 
-const Typography = (props: {
+interface TypographyProps {
   children: string;
   variant: keyof typeof variantMapping;
   element?: keyof HTMLElementTagNameMap;
-}) => {
+  style?: JSX.HTMLAttributes<HTMLElement>["style"];
+  classList?: JSX.HTMLAttributes<HTMLElement>["classList"];
+}
+
+const Typography = (props: TypographyProps) => {
+  const classList = createMemo(() => ({
+    [`mdc-typography--${props.variant}`]: true,
+  }));
+
   return (
     <Dynamic
       component={props.element || variantMapping[props.variant]}
       class={`mdc-typography--${props.variant}`}
+      classList={{ ...classList(), ...props.classList }}
+      style={props.style}
     >
       {props.children}
     </Dynamic>
