@@ -1,1 +1,1 @@
-export { TopAppBar, TopAppBarAdjust } from "./TopAppBar";
+export * from "./TopAppBar";
