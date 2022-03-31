@@ -9,3 +9,4 @@ export { List } from "./List";
 export { Menu } from "./Menu";
 export { Tabs } from "./Tabs";
 export { Drawer } from "./Drawer";
+export * from "./DataTable";
